@@ -11,73 +11,10 @@ import { CalendarDate } from "./utils/CalendarDate";
 import { Overview } from "./utils/Overview";
 import { SalesOverview } from "./utils/SalesOverview";
 import Layout from "@/components/layout/Layout";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
-import React, { useState } from "react";
-import { DayPicker, Row, RowProps } from "react-day-picker";
-import { differenceInCalendarDays } from "date-fns";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
-const HomePage: React.FC = ({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) => {
-  const [selectedView, setSelectedView] = useState<string>("Weekly");
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
-
-  const handleViewChange = (view: string) => {
-    setSelectedView(view);
-    setIsPopoverOpen(false); // Close the popover when a view is selected
-  };
-
-  function isPastDate(date: Date) {
-    return differenceInCalendarDays(date, new Date()) < 0;
-  }
-
-  function OnlyFutureRow(props: RowProps) {
-    const isPastRow = props.dates.every(isPastDate);
-    if (isPastRow) return <></>;
-    return <Row {...props} />;
-  }
-
-  const renderSelectedView = () => {
-    switch (selectedView) {
-      case "Monthly":
-        return (
-          <DayPicker
-            mode="single"
-            selected={selectedDate}
-            onSelect={(date) => setSelectedDate(date as Date)}
-          />
-        );
-      case "Weekly":
-        return (
-          <DayPicker
-            fromDate={new Date()}
-            components={{ Row: OnlyFutureRow }}
-            hidden={isPastDate}
-            styles={{
-              caption: { color: "red" },
-            }}
-            showOutsideDays
-          />
-        );
-      case "Quarterly":
-        return <DayPicker pagedNavigation numberOfMonths={3} />;
-      default:
-        return null;
-    }
-  };
+const HomePage = () => {
   return (
     <Layout>
       <div className="flex h-full flex-col">
@@ -87,46 +24,13 @@ const HomePage: React.FC = ({
             <div className="flex items-center space-x-2">
               {/* Calendar  */}
               <CalendarDate />
-              <div className={cn("grid gap-2", className)}>
-                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                  {/* <DropdownMenu modal={false}> */}
-                  <DropdownMenu modal={false}>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="sm" className="relative">
-                        <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-                        View
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <PopoverTrigger>
-                        <DropdownMenuItem
-                          onClick={() => handleViewChange("Weekly")}
-                        >
-                          Weekly View
-                        </DropdownMenuItem>
-                      </PopoverTrigger>
 
-                      <PopoverTrigger>
-                        <DropdownMenuItem
-                          onClick={() => handleViewChange("Monthly")}
-                        >
-                          Monthly View
-                        </DropdownMenuItem>
-                      </PopoverTrigger>
-                      <PopoverTrigger>
-                        <DropdownMenuItem
-                          onClick={() => handleViewChange("Quarterly")}
-                        >
-                          Quarterly View
-                        </DropdownMenuItem>
-                      </PopoverTrigger>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <PopoverContent className="w-auto p-0" align="end">
-                    {renderSelectedView()}
-                  </PopoverContent>
-                </Popover>
-              </div>
+              <Link to="/date-timetable">
+                <Button size="sm" className="relative">
+                  <MixerHorizontalIcon className="mr-2 h-4 w-4" />
+                  View
+                </Button>
+              </Link>
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">

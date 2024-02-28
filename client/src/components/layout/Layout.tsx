@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <SideNavbar />
         <main className="flex-1 overflow-y-auto overflow-x-hidden pt-16 bg-secondary/10 pb-1">
           <div className="flex flex-col">
-            <div className="flex-1 space-y-4 md:p-8">{children}</div>
+            <div className="flex-1 space-y-4 md:p-8 h-screen">{children}</div>
           </div>
         </main>
       </div>

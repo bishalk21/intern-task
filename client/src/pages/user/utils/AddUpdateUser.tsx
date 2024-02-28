@@ -13,7 +13,6 @@ import {
 import {
   Form,
   FormField,
-  FormItem,
   FormLabel,
   FormControl,
   FormMessage,
@@ -34,6 +33,9 @@ interface AddNewUserSheetProps {
   onSave: (data: UserFormValue) => void;
   onClose: () => void;
   formInstance: UseFormReturn<UserFormValue>;
+  onSubmit: (
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => Promise<void>;
 }
 
 const AddNewUserSheet: React.FC<AddNewUserSheetProps> = ({
@@ -41,15 +43,13 @@ const AddNewUserSheet: React.FC<AddNewUserSheetProps> = ({
   onClose,
   formInstance,
 }) => {
-  const { handleSubmit, control } = formInstance;
-
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button>Add New User</Button>
       </SheetTrigger>
       <SheetContent>
-        <Form
+        <Form<UserFormValue>
           control={formInstance.control}
           onSubmit={formInstance.handleSubmit(onSave)}
         >
