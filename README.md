@@ -1,17 +1,4 @@
-- MongoDB
-- Express JS SERVER
-- React + Vite JS 
-- Node JS 
-- Tailwind CSS
-- Shadcn/ui 
-- TypeScript
- 
 
- api
- - npm init -y
- - setup configuration
- - npm i express --save 
- - create app server and listen on port 
 
  frontend
  - npm create vite@latest
@@ -46,9 +33,3 @@ Are you using React Server Components? › no / yes (no)
 ```
 - start adding components: npx shadcn-ui@latest add 'component'
 
-
-React-router React-router-dom
-- npm install react-router react-router-dom 
-
-Zustand: small, fast and scalable bearbones state-management solution using simplified flux principles.
-- npm install zustand
