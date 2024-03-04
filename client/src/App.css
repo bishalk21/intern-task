@@ -4,6 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
+.event-day {
+  background-color: #ffcccb; /* Light red background color */
+  border-radius: 50%; /* Circular border */
+  color: #ff0000; /* Red text color */
+  /* Add any other styles as needed */
+}
 
 .logo {
   height: 6em;
@@ -39,4 +45,9 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.event-day {
+  background-color: rgb(9, 207, 9) !important;
+  color: white !important;
 }
